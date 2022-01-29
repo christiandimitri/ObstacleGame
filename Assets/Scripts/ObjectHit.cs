@@ -10,14 +10,19 @@ public class ObjectHit : MonoBehaviour
     // Start is called before the first frame update
     private void OnCollisionEnter(Collision collision)
     {
-        // Debug.Log($"Wall Bump !!!");
-        mainColor = GetComponent<MeshRenderer>().material.color;
-        GetComponent<MeshRenderer>().material.color = Color.yellow;
+        if (collision.gameObject.tag == "Player")
+        {
+            mainColor = GetComponent<MeshRenderer>().material.color;
+            GetComponent<MeshRenderer>().material.color = Color.yellow;
+            gameObject.tag = "Hit";
+        }
     }
 
-    private void OnCollisionExit(Collision other)
+    private void OnCollisionExit(Collision collision)
     {
-        // Debug.Log($"Collision Exit !!!");
-        GetComponent<MeshRenderer>().material.color = mainColor;
+        if (collision.gameObject.tag == "Player")
+        {
+            GetComponent<MeshRenderer>().material.color = mainColor;
+        }
     }
 }
