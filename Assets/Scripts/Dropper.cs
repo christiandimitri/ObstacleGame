@@ -5,17 +5,23 @@ namespace DefaultNamespace
 {
     public class Dropper : MonoBehaviour
     {
-        [SerializeField] private float timeToWait = 5f;
+        MeshRenderer renderer => GetComponent<MeshRenderer>();
+        Rigidbody rigidbody => GetComponent<Rigidbody>();
+
+        [SerializeField] float timeToWait = 5f;
 
         private void Start()
         {
+            rigidbody.useGravity = false;
+            renderer.enabled = false;
         }
 
         private void Update()
         {
             if (Time.time > timeToWait)
             {
-                Debug.Log("5 seconds have passed");
+                renderer.enabled = true;
+                rigidbody.useGravity = true;
             }
         }
     }
